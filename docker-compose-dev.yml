@@ -1,0 +1,16 @@
+version: '3.5'
+services:
+  node-app:
+    container_name: node-QrCodeAPI
+    build: 
+     context: ./
+     dockerfile: ./Dockerfile-dev
+    volumes:
+      - ./:/app
+    ports:
+      - '9091:9091'
+      - '9092:9092'
+      - '9229:9229'
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    command: sh -c "npm config set legacy-peer-deps true && npm install --force && npm start"
